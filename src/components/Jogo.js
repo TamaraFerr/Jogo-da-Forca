@@ -9,14 +9,12 @@ import forca6 from "../assets/forca6.png"
 export default function Jogo({error, startGame, color, gameWord}){
     const imagens = [forca0, forca1, forca2, forca3, forca4, forca5, forca6];
 
-
     return(
         <div className="container">
-            <img src={imagens[error]} className="forca" data-test="game-image"/>
-
+            <img src={imagens[error]} className="forca" data-test="game-image" alt="imagens"/>
             <div className="right-collum">
                 <button className="botao" data-test="choose-word" onClick={startGame}>Escolher Palavra</button>
-                <p className={color} data-test="word">{gameWord}</p>
+                <h1 className={color} data-test="word">{gameWord}</h1>
             </div>
 
         </div>

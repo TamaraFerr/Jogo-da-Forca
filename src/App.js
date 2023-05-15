@@ -20,42 +20,51 @@ function App() {
     sortWord()
   }
 
+  function finished(){
+    setGameWord(sortedWord)
+    setPressedWord(alfabeto)
+  }
+
   function sortWord(){
-    const index = math.floor(math.random() * word.length)
+    const index = Math.floor(Math.random() * palavras.length)
     const word = palavras[index]
+    console.log(word)
+
     const arrayFromWord = word.split("")
     setSortedWord(arrayFromWord)
 
+    let espaco = []
+    arrayFromWord.forEach(() => espaco.push(" _"))
+    setGameWord(espaco)
   }
 
-  function selectLetter(letra){
-    console.log("Letra selecionada!")
+  function selectedLetter(letra){
+    console.log(pressedWord)
     setPressedWord([...pressedWord, letra])
 
     if(pressedWord.includes(letra)){
       rightWord(letra)
     } else {
-      wrongWord(letra)
+      wrongWord()
     }
 
   }
 
-  function rightWord(letra){
+  function rightWord(pressWord){
     const novaGameWord = [...gameWord]
 
-    pressedWord.forEach((letter, i) => {
-      if(letter === letra){
-         novaGameWord[i] = letra
-     }
+    sortedWord.forEach((letter, i) => {
+      if(letter === pressWord){
+        novaGameWord[i] = pressWord
+      }
    })
 
     setGameWord(novaGameWord)
     
-    if(!pressedWord.includes(" _")){
+    if(!novaGameWord.includes(" _")){
       setColor("right")
+      finished()
     }
-
-    finished()
   }
   
   function wrongWord(letra){
@@ -64,14 +73,8 @@ function App() {
 
     if(newError === 6){
       setColor("wrong")
+      finished()
     }
-
-    finished()
-  }
-
-  function finished(){
-    setGameWord(sortedWord)
-    setPressedWord(alfabeto)
   }
 
   return (
@@ -81,11 +84,10 @@ function App() {
         startGame={startGame}
         color={color}
         gameWord={gameWord}
-        
       />
       <Letras 
         pressedWord={pressedWord}
-        selectLetter={selectLetter}
+        selectedLetter={selectedLetter}
       />
     </div>
   )
