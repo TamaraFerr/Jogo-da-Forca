@@ -16,6 +16,7 @@ export default function Letras(props){
                     data-test="letter" 
                     onClick={selectLetter}
                     style={{textTransform:'uppercase'}}
+                    disabled={true}
                     >
                         {letra}
                 </li>
